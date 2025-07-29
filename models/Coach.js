@@ -15,5 +15,9 @@ const coachSchema = new mongoose.Schema({
         max:100,
         required:[true, "Price is required"]
     },
+    Description:{
+        type:String,
+        required:[true, "Description is required"]
+    },   
 
 })
