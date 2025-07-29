@@ -5,6 +5,9 @@ const dotenv = require("dotenv").config() //this allows me to use my .env values
 const morgan = require("morgan")
 const methodOverride = require("method-override")
 const conntectToDB = require('./config/db')
+const coachRoutes= require('./routes/Coach.routes')
+const traineeRoutes = require("./routes/Trainee.routes")
+const authRoutes = require("./routes/auth.routes")
 
 
 
@@ -57,8 +60,8 @@ conntectToDB()
 
 
 // Routes go here
-app.use("/Coach", coachRoutes)
-app.use("/Trainee", traineeRoutes)
+// app.use("/Coach", coachRoutes)
+// app.use("/Trainee", traineeRoutes)
 app.use("/auth", authRoutes)
 
 
