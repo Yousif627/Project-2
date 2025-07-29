@@ -32,13 +32,21 @@ router.post("/sign-up", async (req,res)=>{
 
             });
         }
+    
+     const hashedPassword = bcrypt.hashSync(password, 10);
+        const newUser = {
+            username,
+            password: hashedPassword,
+        };
 
+await User.create(newUser); 
 
 
     }
     catch(error){
-        console.log("error ahs appeared ")
+         console.error("Sign-up error:", error);
+        res.render("auth/sign-up", {
+            error: "Something went wrong. Please try again."
+        });
     }
-
-
-})
+});
