@@ -57,7 +57,9 @@ conntectToDB()
 
 
 // Routes go here
-
+app.use("/Coach", coachRoutes)
+app.use("/Trainee", traineeRoutes)
+app.use("/auth", authRoutes)
 
 
 
