@@ -18,6 +18,10 @@ const coachSchema = new mongoose.Schema({
     Description:{
         type:String,
         required:[true, "Description is required"]
-    },   
+    } 
 
 })
+
+const Coach = mongoose.model("Coach", coachSchema)
+
+module.exports = Coach
