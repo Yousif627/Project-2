@@ -1,21 +1,21 @@
-const mongoose = require("mongoose")
+// const mongoose = require("mongoose")
 
 
-const traineeSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:[true, "Name is required"]
-    },
-    age:{
-        type:Number,
-        required:[true, "Age is required"]
-    },
-    trainingDescription:{
-        type:String,
-    }
-})
+// const traineeSchema = new mongoose.Schema({
+//     Name:{
+//         type:String,
+//         required:[true, "Name is required"]
+//     },
+//     Age:{
+//         type:Number,
+//         required:[true, "Age is required"]
+//     },
+//     TrainingDescription:{
+//         type:String,
+//     }
+// })
 
 
-const Trainee = mongoose.model("Trainee", traineeSchema)
+// const Trainee = mongoose.model("Trainee", traineeSchema)
 
-module.exports = Trainee
+// module.exports = Trainee

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1> Update the Coach</h1>
+    <form action="/coach/<%= coach._id%>?_method=PUT" method="post"></form>
+        <label for="Name" >Coach name:</label>
+        <input type="text" name="Name" id="Name" value="<%= coach.Name %>">
+
+        <label for="Age" >Age:</label>
+        <input type="text" name="Age" id="Age" value="<%= coach.Age %>">
+
+        <label for="Price" >Coach name:</label>
+        <input type="text" name="Price" id="Price" value="<%= coach.Price %>">
+
+        <label for="Description" >Coach name:</label>
+        <input type="text" name="Description" id="Description" value="<%= coach.Description%>">
+
+
+
+</body>
+</html>

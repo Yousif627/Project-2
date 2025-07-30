@@ -10,11 +10,11 @@ const commentSchema = new mongoose.Schema({
 
 
 const coachSchema = new mongoose.Schema({
-    name: {
+    Name: {
         type: String,
         required: [true, "username is required"]
     },
-    age: {
+    Age: {
         type: Number,
         required: [true, "age is required"]
     },
