@@ -1,17 +1,32 @@
 const mongoose = require("mongoose")
 
+const coachDetailsSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: [true, "username is required"]
+    },
+    age: {
+        type: Number,
+        required: [true, "age is required"]
+    },
+    description: {
+        type: String,
+        required: [true, "Description is required"]
+    },
+})
+
+
 const userSchema = new mongoose.Schema({
 
-        Username:{
+        username:{
             type:String,
             required:[true, "username is required"]
         }, 
-        Password:{
+        password:{
             type:String,
             required:[true, "password is required "]
-        }
-
-
+        },
+         details: [coachDetailsSchema]
 })
 
 const User = mongoose.model("User", userSchema)

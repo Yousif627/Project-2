@@ -1,55 +1,67 @@
 const router = require("express").Router()
-const User = require ("../models/User")
+const User = require("../models/User")
 const bcrypt = require("bcrypt")
 
 
-
-router.get("/sign-up", (req,res)=>{
-    res.render("auth/sign-up.ejs", {error:null})
+router.get("/sign-up", (req, res) => {
+    res.render("auth/sign-up.ejs", { error: null })
 })
 
-router.post("/sign-up", async (req,res)=>{
-    try{
-        const { username, password} = req.body;
+router.post("/sign-up", async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
-
-        if (!username || !password){
-            return res.render("auth/sign-up",{
-                error:"All fields are required."
+        // VALIDATION
+        //  Check if all the necessary fields are there
+        if (!username || !password) {
+            return res.render("auth/sign-up", {
+                error: "All fields are required."
             });
         }
 
-            if (password.length < 8) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            return res.render("auth/sign-up", {
+                error: "Please enter a valid email address."
+            });
+        }
+
+        if (password.length < 6) {
             return res.render("auth/sign-up", {
                 error: "Password must be at least 6 characters long."
             });
         }
 
-           const existingUser = await User.findOne({ username });
+        // Do we already have this person in our database?
+        const existingUser = await User.findOne({ username });
         if (existingUser) {
             return res.render("auth/sign-up", {
                 error: "Username is already taken."
 
             });
         }
-    
-     const hashedPassword = bcrypt.hashSync(password, 10);
+
+
+        // Hash password and create user
+        const hashedPassword = bcrypt.hashSync(password, 10);
         const newUser = {
             username,
             password: hashedPassword,
         };
 
-await User.create(newUser); 
+        await User.create(newUser);
 
+        // Redirect to Login
+        res.redirect("/auth/login");
 
-    }
-    catch(error){
-         console.error("Sign-up error:", error);
+    } catch (error) {
+        console.error("Sign-up error:", error);
         res.render("auth/sign-up", {
             error: "Something went wrong. Please try again."
         });
     }
 });
+
 
 
 router.get("/login", (req, res) => {
@@ -72,7 +84,7 @@ router.post("/login", async (req, res) => {
         if (!validPassword) {
             return res.render("auth/login", { error: "Incorrect password." });
         }
-
+        
         req.session.user = {
             username: userInDatabase.username,
             _id: userInDatabase._id,
@@ -81,7 +93,7 @@ router.post("/login", async (req, res) => {
         res.redirect("/");
     } catch (error) {
         console.error("Error during sign-in:", error);
-        res.render("auth/sign-in", { error: "An unexpected error occurred." });
+        res.render("auth/sign-up", { error: "An unexpected error occurred." });
     }
 });
 
