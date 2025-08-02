@@ -1,3 +1,14 @@
 <nav>
-    <!-- <a href="/Coach">Coach</a> -->
+    <% if (user){ %>
+    <a href="/Coach">Profile</a>
+    <a href="/auth/logout">Logout</a>
+    <%= user.username %>
+
+
+    <%} else{ %>
+    <a href="/auth/login">Login</a>
+    <a href="/auth/sign-up">Sign Up</a>
+
+    <%} %>
+    
 </nav>

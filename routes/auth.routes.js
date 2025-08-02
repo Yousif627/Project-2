@@ -19,13 +19,6 @@ router.post("/sign-up", async (req, res) => {
             });
         }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            return res.render("auth/sign-up", {
-                error: "Please enter a valid email address."
-            });
-        }
-
         if (password.length < 6) {
             return res.render("auth/sign-up", {
                 error: "Password must be at least 6 characters long."
@@ -84,7 +77,7 @@ router.post("/login", async (req, res) => {
         if (!validPassword) {
             return res.render("auth/login", { error: "Incorrect password." });
         }
-        
+
         req.session.user = {
             username: userInDatabase.username,
             _id: userInDatabase._id,

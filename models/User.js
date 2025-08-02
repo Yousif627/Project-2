@@ -16,6 +16,7 @@ const coachDetailsSchema = new mongoose.Schema({
 })
 
 
+
 const userSchema = new mongoose.Schema({
 
         username:{
@@ -26,7 +27,7 @@ const userSchema = new mongoose.Schema({
             type:String,
             required:[true, "password is required "]
         },
-         details: [coachDetailsSchema]
+        details: coachDetailsSchema
 })
 
 const User = mongoose.model("User", userSchema)

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <h1>Show CService details</h1>
+    <% createService.details.forEach(element => { %>
+        <p><%= element.gameName%></p>
+        <p><%= element.gameExperience%></p>
+        <p><%= element.price%></p>
+        <p><%= element.description%></p>
+    <% }); %>
+</body>
+</html>
