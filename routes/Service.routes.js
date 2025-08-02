@@ -1,27 +1,30 @@
-const router = require("express").Router()
-const Service = require("../models/Service")
-
-router.get("/", (req,res)=>{
-    res.render("Service/new.ejs")
-})
-router.get("/new", (req,res)=>{
-    res.render("Service/new.ejs")
-})
-
-router.post("/", async(req,res)=>{
-    try{
-        console.log(req.body)
-        const createService = await Service.create(req.body)
-        res.redirect("/Service/new")
-        console.log(createService)
-
-    }
-    catch(error){
-        console.log(error)
-    }
-})
+const router = require("express").Router();
+const Service = require("../models/Service");
+const isSignedIn = require("../middleware/isSignedIn");
 
 
+router.get("/new", isSignedIn, (req, res) => {
+  res.render("Service/new");
+});
+
+router.post("/", isSignedIn, async (req, res) => {
+  try {
+    req.body.creator = req.session.user._id;
+    const newService = await Service.create(req.body);
+    res.redirect("/service/my-services");
+  } catch (error) {
+    res.send("Error creating service: " + error.message);
+  }
+});
+
+router.get("/my-services", isSignedIn, async (req, res) => {
+  try {
+    const myServices = await Service.find({ creator: req.session.user._id });
+    res.render("Service/serviceDetails.ejs", { services: myServices });
+  } catch (err) {
+    res.send("Error fetching services: " + err.message);
+  }
+});
 
 
 

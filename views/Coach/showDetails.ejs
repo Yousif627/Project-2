@@ -7,12 +7,13 @@
 </head>
 <body>
 
-
+<form action="/coach/myDetails/<%= currentUser.details._id %>?_method=DELETE" method="post" onsubmit="return confirm('Are you sure you want to delete your coach details?');" style="display:inline;">
     <h1>Show Coach details</h1>
         <p>Coach Name: <%= currentUser.details.name %></p>
         <p>Age: <%= currentUser.details.age %></p>
         <p>Description: <%= currentUser.details.description %></p>
         <a href="/coach/myDetails/<%= currentUser.details._id %>/edit">edit</a>
- 
+        <button type="submit" style="background-color:red; color:white;">Delete</button>
+ </form>
 </body>
 </html>

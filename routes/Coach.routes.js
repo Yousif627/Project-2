@@ -65,6 +65,20 @@ router.put('/myDetails/:id', async (req, res) => {
   }
 });
 
+router.delete('/myDetails/:id', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+
+    currentUser.details = undefined;
+
+    await currentUser.save();
+    
+    res.redirect('/coach/new');
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Error deleting coach details.");
+  }
+});
 
 
 

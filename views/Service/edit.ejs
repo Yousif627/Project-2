@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Service</title>
+</head>
+<body>
+  <h1>Edit Service</h1>
+  <form action="/service/myDetails/<%= serviceDetails._id %>?_method=PUT" method="POST">
+    <label>Game Name:</label>
+    <input name="gameName" type="text" value="<%= serviceDetails.gameName %>"><br>
+
+    <label>Years of Experience:</label>
+    <input name="gameExperience" type="number" value="<%= serviceDetails.gameExperience %>"><br>
+
+    <label>Price per hour:</label>
+    <input name="price" type="number" value="<%= serviceDetails.price %>"><br>
+
+    <label>Description:</label>
+    <input name="description" type="text" value="<%= serviceDetails.description %>"><br>
+
+    <button type="submit">Update Service</button>
+  </form>
+</body>
+</html>
