@@ -17,14 +17,17 @@ router.post("/", isSignedIn, async (req, res) => {
   }
 });
 
-router.get("/my-services", isSignedIn, async (req, res) => {
+router.get("/my-services", async (req, res) => {
   try {
-    const myServices = await Service.find({ creator: req.session.user._id });
-    res.render("Service/serviceDetails.ejs", { services: myServices });
-  } catch (err) {
-    res.send("Error fetching services: " + err.message);
+    const userId = req.session.user._id;
+    const userServices = await Service.find({ creator: userId });
+    res.render("Service/serviceDetails.ejs", { userServices });
+  } catch (error) {
+    console.log(error);
+    console.log(error)
   }
 });
+
 
 
 

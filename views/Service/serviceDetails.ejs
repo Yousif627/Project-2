@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Services</title>
 </head>
 <body>
-     <h1>Show CService details</h1>
-    <% currentUser.details.forEach(element => { %>
-        <p><%= element.gameName%></p>
-        <p><%= element.gameExperience%></p>
-        <p><%= element.price%></p>
-        <p><%= element.description%></p>
-    <% }); %>
+  <h1>My Services</h1>
+  <% userServices.forEach(service => { %>
+      <p><strong>Game:</strong> <%= service.gameName %></p>
+      <p><strong>Experience:</strong> <%= service.gameExperience %> years</p>
+      <p><strong>Price:</strong> $<%= service.price %>/hour</p>
+      <p><strong>Description:</strong> <%= service.description %></p>
+    </div>
+  <% }) %>
 </body>
 </html>
