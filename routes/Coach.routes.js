@@ -48,9 +48,15 @@ router.get("/myDetails/:id/edit", async(req,res)=>{
     }
 })
 
+router.put('/myDetails/:id', async (req, res) => {
+  try {
+    const currentUser = await User.findById(req.session.user._id);
+   + await currentUser.save();
 
-// router.put("/:id", async (req,res)=>{})
-
-
+    res.redirect('/coach/myDetails');
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = router
