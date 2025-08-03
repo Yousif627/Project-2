@@ -1,31 +1,15 @@
-const mongoose = require("mongoose")
-
+const mongoose = require("mongoose");
 
 const serviceSchema = new mongoose.Schema({
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
-    
-    gameName: {
-        type: String,
-        required: true
-    },
-    gameExperience: {
-        type: Number,
-        required: true
-    },
-    price: {
-        type: Number,
-        required: true,
-        min: 0,
-        max: 50
-    },
-    description: {
-        type: String,
-        required: true
-    },
-    
+  coach: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+},
+  gameName: {String},
+  gameExperience: {String},
+  description: {String},
+  price: {Number}
+});
 
-})
-
-const Service = mongoose.model("Service", serviceSchema)
-
-module.exports = Service
+module.exports = mongoose.model("Service", serviceSchema);

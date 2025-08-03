@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Service = require("../models/Service");
-const isSignedIn = require("../middleware/isSignedIn");
+
 
 
 router.get("/", async (req, res) => {
@@ -14,13 +14,13 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/new",isSignedIn, (req, res) => {
-  if (!req.session.user) return res.redirect("/login");
-  res.render("Service/new.ejs");
+router.get("/new", (req, res) => {
+  const prefillGameName = req.query.gameName || "";
+  res.render("Service/new.ejs", { prefillGameName });
 });
 
 
-router.post("/",isSignedIn, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const newService = new Service({
       gameName: req.body.gameName,
@@ -39,7 +39,7 @@ router.post("/",isSignedIn, async (req, res) => {
 });
 
 
-router.get("/:id/edit",isSignedIn, async (req, res) => {
+router.get("/:id/edit", async (req, res) => {
   try {
     const service = await Service.findById(req.params.id);
     if (!service) return res.send("Service not found");
@@ -57,7 +57,7 @@ router.get("/:id/edit",isSignedIn, async (req, res) => {
 });
 
 
-router.post("/:id", isSignedIn, async (req, res) => {
+router.post("/:id", async (req, res) => {
   try {
     const service = await Service.findOneAndUpdate(
       { _id: req.params.id, creator: req.session.user._id },
@@ -75,7 +75,7 @@ router.post("/:id", isSignedIn, async (req, res) => {
 });
 
 
-router.delete("/:id",isSignedIn, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const service = await Service.findById(req.params.id);
 

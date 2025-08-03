@@ -3,6 +3,7 @@ const express = require("express") //importing express package
 const app = express() // creates a express application
 const dotenv = require("dotenv").config() //this allows me to use my .env values in this file
 const morgan = require("morgan")
+const path = require("path");
 const methodOverride = require("method-override")
 const conntectToDB = require('./config/db')
 const authRoutes = require("./routes/auth.routes")
@@ -11,6 +12,7 @@ const passUserToView = require('./middleware/passUserToView ')
 const isSignedIn = require("./middleware/isSignedIn")
 const coachRoutes = require('./routes/Coach.routes')
 const serviceRoutes = require("./routes/Service.routes")
+const homeRoutes = require("./routes/home.routes");
 
 
 
@@ -33,7 +35,7 @@ app.use(
 ); // uses the secret session code in the .env to encrypt the token
 app.set("view engine", "ejs") //is more specific on which view engine we are using
 // app.use(passUserToView) //used to set the res.locals.user for each ejs page
-
+app.set("views", path.join(__dirname, "views"));
 
 // connect to database
 conntectToDB()
@@ -45,11 +47,11 @@ conntectToDB()
 
 
 
-
-app.use("/service", serviceRoutes)
+app.use("/", homeRoutes);
 app.use("/auth",authRoutes)
-app.use(isSignedIn) //all your protected routes go below this middleware
 app.use('/coach', coachRoutes)
+app.use(isSignedIn) //all your protected routes go below this middleware
+app.use("/service", serviceRoutes)
 
 // Routes go here
 

@@ -7,88 +7,62 @@ router.get("/sign-up", (req, res) => {
     res.render("auth/sign-up.ejs", { error: null })
 })
 
-router.post("/sign-up", async (req, res) => {
-    try {
-        const { username, password } = req.body;
+router.post("/signup", async (req, res) => {
+  const { username, password, role } = req.body;
 
-        // VALIDATION
-        //  Check if all the necessary fields are there
-        if (!username || !password) {
-            return res.render("auth/sign-up", {
-                error: "All fields are required."
-            });
-        }
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-        if (password.length < 6) {
-            return res.render("auth/sign-up", {
-                error: "Password must be at least 6 characters long."
-            });
-        }
+    const newUser = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+      role
+    });
 
-        // Do we already have this person in our database?
-        const existingUser = await User.findOne({ username });
-        if (existingUser) {
-            return res.render("auth/sign-up", {
-                error: "Username is already taken."
-
-            });
-        }
-
-
-        // Hash password and create user
-        const hashedPassword = bcrypt.hashSync(password, 10);
-        const newUser = {
-            username,
-            password: hashedPassword,
-        };
-
-        await User.create(newUser);
-
-        // Redirect to Login
-        res.redirect("/auth/login");
-
-    } catch (error) {
-        console.error("Sign-up error:", error);
-        res.render("auth/sign-up", {
-            error: "Something went wrong. Please try again."
-        });
-    }
+    req.session.user = newUser;
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.render("signup", { error: "Signup failed. Try again." });
+  }
 });
+
 
 
 
 router.get("/login", (req, res) => {
     res.render("auth/login.ejs", { error: null })
 })
-
 router.post("/login", async (req, res) => {
-    try {
-        const userInDatabase = await User.findOne({ username: req.body.username });
-
-        if (!userInDatabase) {
-            return res.render("auth/login", { error: "Username not found." });
-        }
-
-        const validPassword = bcrypt.compareSync(
-            req.body.password,
-            userInDatabase.password
-        );
-
-        if (!validPassword) {
-            return res.render("auth/login", { error: "Incorrect password." });
-        }
-
-        req.session.user = {
-            username: userInDatabase.username,
-            _id: userInDatabase._id,
-        };
-
-        res.redirect("/");
-    } catch (error) {
-        console.error("Error during sign-in:", error);
-        res.render("auth/sign-up", { error: "An unexpected error occurred." });
+  try {
+    const userInDatabase = await User.findOne({ username: req.body.username });
+    if (!userInDatabase) {
+      return res.render("auth/login", { error: "Username not found." });
     }
+
+    const validPassword = bcrypt.compareSync(
+      req.body.password,
+      userInDatabase.password
+    );
+
+    if (!validPassword) {
+      return res.render("auth/login", { error: "Incorrect password." });
+    }
+
+    req.session.user = {
+      username: userInDatabase.username,
+      _id: userInDatabase._id,
+    };
+
+    // Redirect to home page after login
+    res.redirect("/");
+  } catch (error) {
+    console.error("Error during sign-in:", error);
+    res.render("auth/login", { error: "An unexpected error occurred." });
+  }
 });
+
 
 
 

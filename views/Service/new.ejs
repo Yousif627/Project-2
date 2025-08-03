@@ -8,8 +8,8 @@
 <body>
    <h1>Add Your Service</h1>
 <form action="/service" method="post">
-  <label>Game Name:</label>
-  <input type="text" name="gameName" required />
+ <label for="gameName">Game Name:</label>
+<input id="gameName" name="gameName" type="text" value="<%= prefillGameName %>">
 
   <label>Years of Experience:</label>
   <input type="number" name="gameExperience" required min="0" />
