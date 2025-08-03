@@ -61,7 +61,7 @@ router.put('/myDetails/:id', async (req, res) => {
     res.redirect('/coach/myDetails');
   } catch (error) {
     console.log(error);
-    res.status(500).send("Error updating coach details.");
+ console.log(error);
   }
 });
 
@@ -72,11 +72,11 @@ router.delete('/myDetails/:id', async (req, res) => {
     currentUser.details = undefined;
 
     await currentUser.save();
-    
+
     res.redirect('/coach/new');
   } catch (error) {
     console.log(error);
-    res.status(500).send("Error deleting coach details.");
+  console.log(error);
   }
 });
 
