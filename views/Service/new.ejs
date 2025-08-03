@@ -6,22 +6,23 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Create a new service</h1>
-    <form action="/service" method="post">
+   <h1>Add Your Service</h1>
+<form action="/service" method="post">
+  <label>Game Name:</label>
+  <input type="text" name="gameName" required />
 
-     <label for="gameName">Game Name:</label>
-        <input id="gameName" name="gameName" type="text">
+  <label>Years of Experience:</label>
+  <input type="number" name="gameExperience" required min="0" />
 
-        <label for="gameExperience">Years of Expersience:</label>
-        <input id="gameExperience" name="gameExperience" type="number">
+  <label>Price per hour ($):</label>
+  <input type="number" name="price" required min="0" step="0.01" />
 
-        <label for=" price">Price per hour $:</label>
-        <input name="price" id="price" type="number">
+  <label>Description:</label>
+  <textarea name="description" required></textarea>
 
-        <label for=" description"> Description:</label>
-        <input name="description" id="description" type="text">
+  <button type="submit">Add Service</button>
+</form>
 
-        <button type="submit"> Create Service</button>
-    </form>
+
 </body>
 </html>

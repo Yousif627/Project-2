@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 
 
 const serviceSchema = new mongoose.Schema({
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     
     gameName: {
         type: String,

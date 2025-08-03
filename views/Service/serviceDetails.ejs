@@ -1,26 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Services</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coach Services</title>
 </head>
 <body>
-  <h1>Your Services</h1>
+  <h1>Coach Services</h1>
 
-<% userServices.forEach(service => { %>
-    <p><strong>Game:</strong> <%= service.gameName %></p>
-    <p><strong>Experience:</strong> <%= service.gameExperience %> years</p>
-    <p><strong>Price:</strong> $<%= service.price %>/hr</p>
-    <p><strong>Description:</strong> <%= service.description %></p>
+  <a href="/service/new">Add New Service</a>
 
-    <a href="/service/<%= service._id %>/edit">Edit</a>
+  <ul>
+    <% services.forEach(service => { %>
+      <li>
+        <strong>Game:</strong> <%= service.gameName %><br />
+        <strong>Experience:</strong> <%= service.gameExperience %> years<br />
+        <strong>Price:</strong> $<%= service.price %> per hour<br />
+        <strong>Description:</strong> <%= service.description %><br />
 
-    <form action="/service/<%= service._id %>?_method=DELETE" method="post" onsubmit="return confirm('Are you sure?');" style="display:inline;">
-      <button type="submit" style="background-color:red; color:white;">Delete</button>
-    </form>
-  </div>
-<% }); %>
+        <!-- Edit button -->
+        <a href="/service/<%= service._id %>/edit">Edit</a>
 
+        <!-- Delete button -->
+        <form
+          action="/service/<%= service._id %>?_method=DELETE"
+          method="POST"
+          style="display:inline;"
+          onsubmit="return confirm('Are you sure you want to delete this service?');"
+        >
+          <button type="submit" style="background-color:red; color:white;">
+            Delete
+          </button>
+        </form>
+      </li>
+      <hr />
+    <% }) %>
+  </ul>
 </body>
 </html>

@@ -1,25 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Edit Service</title>
 </head>
 <body>
   <h1>Edit Service</h1>
+
   <form action="/service/<%= service._id %>?_method=PUT" method="POST">
-    <label>Game Name:</label>
-    <input type="text" name="gameName" value="<%= service.gameName %>"><br>
+    <label for="gameName">Game Name:</label><br />
+    <input
+      type="text"
+      id="gameName"
+      name="gameName"
+      value="<%= service.gameName %>"
+      required
+    /><br /><br />
 
-    <label>Experience (years):</label>
-    <input type="number" name="gameExperience" value="<%= service.gameExperience %>"><br>
+    <label for="gameExperience">Years of Experience:</label><br />
+    <input
+      type="number"
+      id="gameExperience"
+      name="gameExperience"
+      value="<%= service.gameExperience %>"
+      min="0"
+      required
+    /><br /><br />
 
-    <label>Price per hour:</label>
-    <input type="number" name="price" value="<%= service.price %>"><br>
+    <label for="price">Price per hour ($):</label><br />
+    <input
+      type="number"
+      id="price"
+      name="price"
+      value="<%= service.price %>"
+      min="0"
+      step="0.01"
+      required
+    /><br /><br />
 
-    <label>Description:</label>
-    <input type="text" name="description" value="<%= service.description %>"><br>
+    <label for="description">Description:</label><br />
+    <textarea
+      id="description"
+      name="description"
+      required
+      rows="4"
+      cols="50"
+    ><%= service.description %></textarea
+    ><br /><br />
 
     <button type="submit">Update Service</button>
   </form>
+
+  <br />
+  <a href="/service">Back to Services</a>
 </body>
 </html>
