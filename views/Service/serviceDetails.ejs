@@ -10,7 +10,9 @@
 <body>
   <h1>Coach Services</h1>
 
+  <% if(user.role === "coach"){ %>
   <a href="/service/new/<%= gameName %>">Add New Service</a>
+  <%} %>
 
   <ul>
     <% services.forEach(service=> { %>
@@ -23,7 +25,8 @@
               <strong>Description:</strong>
               <%= service.description %><br />
 
-                <!-- Edit button -->
+              <% if(user && user._id == service.user._id) {%>
+                  <!-- Edit button -->
                 <a href="/service/<%= service._id %>/edit">Edit</a>
 
                 <!-- Delete button -->
@@ -33,6 +36,8 @@
                     Delete
                   </button>
                 </form>
+              <%} %>
+              
       </li>
       <hr />
       <% }) %>

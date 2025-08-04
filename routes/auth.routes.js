@@ -20,7 +20,7 @@ router.post("/signup", async (req, res) => {
     });
 
     req.session.user = newUser;
-    res.redirect("/");
+    res.redirect("/auth/login");
   } catch (error) {
     console.error(error);
     res.render("signup", { error: "Signup failed. Try again." });
