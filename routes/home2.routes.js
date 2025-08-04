@@ -55,16 +55,16 @@ const games = [
 
 
 router.get("/", (req, res) => {
-  res.render("home/home.ejs", {  currentUser: req.session.user || null,
+  res.render("home/home2.ejs", { currentUser: req.session.user || null,
   games, });
 });
 
-router.post("/", (req, res) => {
+ router.post("/", (req, res) => {
   const selectedGame = req.body.gameName;
   if (!selectedGame) {
-    return res.redirect("/");
+    return res.render("Service/serviceDetails.ejs", { error: "Please select a game." });
+  }else{
+    res.send("details cannot be shown")
   }
-  res.redirect(`/service/new?gameName=${encodeURIComponent(selectedGame)}`);
 });
-
 module.exports = router;

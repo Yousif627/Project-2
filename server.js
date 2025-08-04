@@ -50,7 +50,6 @@ conntectToDB()
 app.use("/", homeRoutes);
 app.use("/auth",authRoutes)
 app.use('/coach', coachRoutes)
-app.use(isSignedIn) //all your protected routes go below this middleware
 app.use("/service", serviceRoutes)
 
 // Routes go here

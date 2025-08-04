@@ -4,68 +4,121 @@ const Service = require("../models/Service");
 
 
 
+
+function isCoach(req, res, next) {
+    console.log(req.session.user);
+
+  if (req.session.user && req.session.user.role === "coach") {
+    return next();
+  }
+  return res.redirect("/service");
+}
+
+
+router.get("/new/:gameName", isCoach, (req, res) => {
+  const gameName = req.params.gameName;
+  res.render("Service/new.ejs", { gameName });
+});
+
+
+router.post("/", isCoach, async (req, res) => {
+  const { gameName, yearsOfExperience, description, price } = req.body;
+
+  const createdService = await Service.create({
+    user: req.session.user._id,
+    gameName,
+    yearsOfExperience,
+    description,
+    price
+  });
+
+  res.redirect("/service/" + createdService.gameName);
+});
+router.post("/service", async (req, res) => {
+  try {
+    if (!req.session.currentUser || req.session.currentUser.role !== "coach") {
+      return res.redirect("/auth/login");
+    }
+
+    const serviceData = {
+      ...req.body,
+      user: req.session.currentUser._id, 
+    };
+
+    await Service.create(serviceData);
+    res.redirect("/");
+  } catch (error) {
+    console.error(error);
+    res.render("services/new.ejs", {
+      error: "Failed to create service",
+      gameName: req.query.gameName || "",
+    });
+  }
+});
+
 router.get("/", async (req, res) => {
   try {
-    const services = await Service.find().populate("creator", "username");
-    res.render("Service/serviceDetails.ejs", { services,user: req.session.user });
+    const services = await Service.find();
+    res.render("Service/serviceDetails.ejs", { services, user: req.session.user });
   } catch (error) {
     console.error(error);
     res.send("Error loading services");
   }
 });
 
-router.get("/new", (req, res) => {
-  const prefillGameName = req.query.gameName || "";
-  res.render("Service/new.ejs", { prefillGameName });
-});
+router.get('/:gameName', async (req, res) => {
+  const gameName = req.params.gameName;
 
-
-router.post("/", async (req, res) => {
   try {
-    const newService = new Service({
-      gameName: req.body.gameName,
-      gameExperience: req.body.gameExperience,
-      price: req.body.price,
-      description: req.body.description,
-      creator: req.session.user._id 
-    });
+    const services = await Service.find({ gameName: new RegExp(`^${gameName}$`, 'i') }).populate('user');
 
-    await newService.save();
-    res.redirect("/service");
+    res.render('Service/serviceDetails.ejs', { services, gameName });
   } catch (error) {
     console.error(error);
-    res.send("Error creating service");
+    res.send('Server error');
   }
 });
 
 
+
 router.get("/:id/edit", async (req, res) => {
   try {
-    const service = await Service.findById(req.params.id);
-    if (!service) return res.send("Service not found");
+    const services = await Service.findById(req.params.id);
+    if (!services) return res.send("Service not found");
 
    
-    if (service.creator.toString() !== req.session.user._id.toString()) {
+    if (services.user.toString() !== req.session.user._id.toString()) {
       return res.send("Not authorized");
     }
 
-    res.render("Service/edit.ejs", { service });
+    res.render("Service/edit.ejs", { services });
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.send("Error loading service for edit");
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  try {
+    const editService = await Service.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.redirect(`/service/${editService.gameName}`);
+  }
+  catch(error){
+    console.error("Error updating service:", error);
+    res.send("Error updating service");
   }
 });
 
 
 router.post("/:id", async (req, res) => {
   try {
-    const service = await Service.findOneAndUpdate(
+    const services = await Service.findOneAndUpdate(
       { _id: req.params.id, creator: req.session.user._id },
       req.body,
       { new: true }
     );
 
-    if (!service) return res.status(403).send("Not authorized");
+    if (!services) return res.send("Not authorized");
 
     res.redirect("/service");
   } catch (error) {
@@ -77,16 +130,16 @@ router.post("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-    const service = await Service.findById(req.params.id);
+    const services = await Service.findByIdAndDelete(req.params.id);
 
-    if (!service) {
-      return res.send("Service not found");
-    }
-    if (service.creator.toString() !== req.session.user._id.toString()) {
-      return res.send("Not authorized");
-    }
-    await service.deleteOne();
-    res.redirect("/service");
+    // if (!services) {
+    //   return res.send("Service not found");
+    // }
+    // if (services.creator.toString() !== req.session.user._id.toString()) {
+    //   return res.send("Not authorized");
+    // }
+    // await services.deleteOne();
+    res.redirect(`/service/${services.gameName}`);
   } catch (error) {
     console.error(error);
     res.send("Error deleting service");

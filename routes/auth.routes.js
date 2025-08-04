@@ -15,7 +15,6 @@ router.post("/signup", async (req, res) => {
 
     const newUser = await User.create({
       username,
-      email,
       password: hashedPassword,
       role
     });
@@ -53,6 +52,7 @@ router.post("/login", async (req, res) => {
     req.session.user = {
       username: userInDatabase.username,
       _id: userInDatabase._id,
+      role: userInDatabase.role
     };
 
     // Redirect to home page after login

@@ -6,21 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-   <h1>Add Your Service</h1>
-<form action="/service" method="post">
- <label for="gameName">Game Name:</label>
-<input id="gameName" name="gameName" type="text" value="<%= prefillGameName %>">
+ <h2>Apply to Coach for <%= gameName %></h2>
 
-  <label>Years of Experience:</label>
-  <input type="number" name="gameExperience" required min="0" />
+<form action="/service" method="POST">
+  <input type="hidden" name="gameName" value="<%= gameName%>"/>
 
-  <label>Price per hour ($):</label>
-  <input type="number" name="price" required min="0" step="0.01" />
+  <label>Years Of Experience</label>
+  <input type="number" name="yearsOfExperience" required />
 
-  <label>Description:</label>
+  <label>Description</label>
   <textarea name="description" required></textarea>
 
-  <button type="submit">Add Service</button>
+  <label>Price per Session ($)</label>
+  <input type="number" name="price" required />
+
+  <button type="submit">Submit Coaching Service</button>
 </form>
 
 
