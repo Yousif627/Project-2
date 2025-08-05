@@ -86,18 +86,19 @@ project-root/
    git clone https://github.com/your-username/game-coach.git
    cd game-coach
 
-2. Install Dependencies<br>
+2. **Install Dependencies**<br>
+     ```bash
+    npm install
 
-npm install
-
-3. Configure Environment<br>
-
+3. **Configure Environment**<br>
+ ```bash
  Create a .env file:
 MONGO_URL=mongodb+srv://your-uri
 SESSION_SECRET=your-secret
 PORT=3000
 
-4. Run the App
+4. **Run the App**
+ ```bash
 Run the App
 
 5. Open http://localhost:3000 in your browser
@@ -129,6 +130,17 @@ Run the App
 .Coach Badges / Achievements 
 
 .Video Uploads (Game Clips) 
+
+## 🛠️ Technologies Used
+
+This project is built entirely with **vanilla web technologies**, without any frameworks or libraries.
+
+- 🧱 **HTML5** – Markup for structure
+- 🎨 **CSS3** – Styling, animations, and layout
+- ⚙️ **JavaScript (ES6)** – Game logic and interactivity
+- 🔡 **Google Fonts** – Themed fonts like Archivo Black, Grenze Gotisch, Fira Sans
+
+---
 
 📄 License
 .This project is for learning and educational use.
