@@ -97,8 +97,8 @@ MONGO_URL=mongodb+srv://your-uri
 SESSION_SECRET=your-secret
 PORT=3000
 
-4. **Run the App**
- ```bash
+4. Run the App
+
 Run the App
 
 5. Open http://localhost:3000 in your browser
