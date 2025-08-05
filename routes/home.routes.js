@@ -5,7 +5,7 @@ const games = [
   { name: "League of Legends", image: "https://images.ctfassets.net/vfkpgemp7ek3/1lqVpXAGDXmXIZT0jLgUls/f158d27e3452fa2e2b575b31533122e1/league-of-legends-wild-rift-500-million.jpeg" },
   { name: "Valorant", image: "https://store-images.s-microsoft.com/image/apps.21507.13663857844271189.4c1de202-3961-4c40-a0aa-7f4f1388775a.20ed7782-0eda-4f9d-b421-4cc47492edc6" },
   { name: "Fortnite", image: "https://cdn.mobygames.com/covers/8572823-fortnite-playstation-4-front-cover.jpg" },
-  { name: "Overwatch", image: "https://preview.redd.it/3b38e6cpmj971.png?width=640&crop=smart&auto=webp&s=13fbd3bd57f36fc20a64f15c91460a3d9aa6fbe0" },
+  { name: "Overwatch", image: "https://writersblockmagazine.com/wp-content/uploads/2017/12/cat-cover1.jpg?w=960" },
   { name: "Apex Legends", image:"https://cdn.mobygames.com/covers/18989239-apex-legends-xbox-one-front-cover.jpg "},
   { name: "Call of Duty", image:"https://preview.redd.it/cod-which-cod-game-has-the-best-cover-art-ill-go-first-v0-lhwczd71sel91.jpg?auto=webp&s=68ee52f75c50f7ba4539b8094b39b6654ef7b295"},
   { name: "Minecraft", image: "https://preview.redd.it/how-do-we-feel-about-new-minecraft-cover-art-v0-31mphd031ibd1.png?width=640&crop=smart&auto=webp&s=ab51d420f5039d4157cf06f7639d55de220be020" },

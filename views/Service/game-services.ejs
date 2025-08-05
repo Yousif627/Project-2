@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Coaches for <%= gameName %></title>
+    <title>Coaches for <%= gameName %>
+    </title>
 </head>
+
 <body>
-  <h1>Coaches for <%= gameName %></h1>
+    <h1>Coaches for <%= gameName %>
+    </h1>
 
-  <% if (services.length === 0) { %>
-    <p>No coaching services available for this game yet.</p>
-  <% } else { %>
-    <% services.forEach(service => { %>
-      <div class="service-card">
-        <h3><%= service.user.username %> (Coach)</h3>
-        <p><strong>Years of Experience:</strong><%= service.yearsOfExperience%></p>
-        <p><strong>Description:</strong> <%= service.description %></p>
-        <p><strong>Price:</strong> $<%= service.price %></p>
-      </div>
-    <% }) %>
-  <% } %>
+    <% if (services.length===0) { %>
+        <p>No coaching services available for this game yet.</p>
+        <% } else { %>
+            <% services.forEach(service=> { %>
+                <div class="service-card">
+                    <h3>
+                        <%= service.user.username %> (Coach)
+                    </h3>
+                    <p><strong>Years of Experience:</strong>
+                        <%= service.yearsOfExperience%>
+                    </p>
+                    <p><strong>Description:</strong>
+                        <%= service.description %>
+                    </p>
+                    <p><strong>Price:</strong> $<%= service.price %>
+                    </p>
+                </div>
+                <% }) %>
+                    <% } %>
 
-  <a href="/">← Back to Home</a>
+                        <a href="/">← Back to Home</a>
 </body>
+
 </html>

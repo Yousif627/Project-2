@@ -22,7 +22,6 @@ router.post("/signup", async (req, res) => {
     req.session.user = newUser;
     res.redirect("/auth/login");
   } catch (error) {
-    console.error(error);
     res.render("signup", { error: "Signup failed. Try again." });
   }
 });
@@ -55,10 +54,9 @@ router.post("/login", async (req, res) => {
       role: userInDatabase.role
     };
 
-    // Redirect to home page after login
+   
     res.redirect("/");
   } catch (error) {
-    console.error("Error during sign-in:", error);
     res.render("auth/login", { error: "An unexpected error occurred." });
   }
 });

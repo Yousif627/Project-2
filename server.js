@@ -6,13 +6,13 @@ const morgan = require("morgan")
 const path = require("path");
 const methodOverride = require("method-override")
 const conntectToDB = require('./config/db')
-const authRoutes = require("./routes/auth.routes")
+const authRoutes = require("./routes/auth.routes.js") //importing the auth routes
 const session = require("express-session")
 const passUserToView = require('./middleware/passUserToView ')
 const isSignedIn = require("./middleware/isSignedIn")
-const coachRoutes = require('./routes/Coach.routes')
-const serviceRoutes = require("./routes/Service.routes")
-const homeRoutes = require("./routes/home.routes");
+const coachRoutes = require('./routes/Coach.routes.js')
+const serviceRoutes = require("./routes/Service.routes.js")
+const homeRoutes = require("./routes/home.routes.js");
 
 
 
@@ -51,7 +51,7 @@ app.use("/", homeRoutes);
 app.use("/auth",authRoutes)
 app.use('/coach', coachRoutes)
 app.use("/service", serviceRoutes)
-
+app.use(express.static("public"));
 // Routes go here
 
 
