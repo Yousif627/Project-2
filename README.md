@@ -86,10 +86,12 @@ project-root/
    git clone https://github.com/your-username/game-coach.git
    cd game-coach
 
-2. Install Dependencies
+2. Install Dependencies<br>
+```bash
 npm install
 
-3. Configure Environment
+3. Configure Environment<br>
+```bash
  Create a .env file:
 MONGO_URL=mongodb+srv://your-uri
 SESSION_SECRET=your-secret
@@ -100,11 +102,14 @@ Run the App
 
 5. Open http://localhost:3000 in your browser
 
-🖼 UI Preview
+🖼 UI Preview<br>
+```bash
 .Games are shown in card layout with hover effects and responsive design.
 
 
-👥 Credits
+👥 Credits<br>
+```bash
+
 .Israa – 75% of the work
 
 .Omar – 20%
