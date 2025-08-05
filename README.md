@@ -8,7 +8,6 @@ Welcome to **Game Coach** — a full-stack web application where users can becom
 
 ## 🌐 Live Preview
 
-*(Optional: Add link to your deployed app here, e.g., Render, Vercel, Netlify)*
 
 ---
 
